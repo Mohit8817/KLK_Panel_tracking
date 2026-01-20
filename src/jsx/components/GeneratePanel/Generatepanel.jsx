@@ -1,0 +1,139 @@
+import React, { Fragment, useState } from "react";
+import PageTitle from "../../layouts/PageTitle";
+
+const Generatepanel = () => {
+  const [formData, setFormData] = useState({
+    date: "",
+    totalPanels: "",
+    capacity: "",
+    panelType: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const serialPrefix = `${formData.panelType}-${formData.capacity}`;
+    alert(`Serial Generated Example: ${serialPrefix}-0001`);
+  };
+
+  return (
+    <Fragment>
+      <PageTitle
+        activeMenu="Generate Panel"
+        motherMenu="Panel Management"
+        pageContent="Generate Serial No"
+      />
+
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Generate Panel Serial Number</h4>
+            </div>
+
+            <div className="card-body">
+              <form className="form-valide" onSubmit={handleSubmit}>
+                <div className="row">
+
+                  {/* Date */}
+                  <div className="col-xl-6 col-md-6">
+                    <div className="form-group mb-3">
+                      <label className="form-label">
+                        Date <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        name="date"
+                        value={formData.date}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* No of Panels */}
+                  <div className="col-xl-6 col-md-6">
+                    <div className="form-group mb-3">
+                      <label className="form-label">
+                        No of Panels <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name="totalPanels"
+                        placeholder="Enter total panels"
+                        value={formData.totalPanels}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Capacity */}
+                  <div className="col-xl-6 col-md-6">
+                    <div className="form-group mb-3">
+                      <label className="form-label">
+                        Panel Capacity (W) <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="capacity"
+                        placeholder="e.g. 540W"
+                        value={formData.capacity}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Panel Type */}
+                  <div className="col-xl-6 col-md-6">
+                    <div className="form-group mb-3">
+                      <label className="form-label">
+                        Panel Type <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        className="form-control"
+                        name="panelType"
+                        value={formData.panelType}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Select Type</option>
+                        <option value="Mono">Mono</option>
+                        <option value="Poly">Poly</option>
+                        <option value="Bifacial">Bifacial</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Submit Button */}
+                <div className="row mt-3">
+                  <div className="col-lg-12 text-center">
+                    <button type="submit" className="btn btn-primary px-4">
+                      Generate Serial No
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default Generatepanel;
